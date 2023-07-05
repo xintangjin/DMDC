@@ -191,13 +191,3 @@ class GAP_net(nn.Module):
         x = shift_3d(x)
         return x[:, :, :, 0:256]
 
-
-# from thop import profile
-# model = GAP_net().cuda()
-# input = torch.randn(1,1, 256, 316).cuda()
-# # z = model(input, rgb, input_mask)
-# # print(z.shape)
-# total_ops, total_params = profile(model, inputs=(input))
-# print(
-#         "%s | %.2f | %.2f" % ("MST_Plus_Plus", total_params / (1000 ** 2), total_ops / (1000 ** 3))
-#     )

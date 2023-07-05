@@ -110,9 +110,3 @@ class MsakNet(nn.Module):
 
         out = out.squeeze(1)
         return self.activation(out)
-
-# mask_base = torch.randn(256, 256).cuda()
-# input = torch.randn(2,3, 256, 256).cuda()
-# a = MsakNet(mask_base).cuda()
-# b = a(input)
-# print(b.shape)

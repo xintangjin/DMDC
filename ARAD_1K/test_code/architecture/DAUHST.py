@@ -365,17 +365,3 @@ class DAUHST(nn.Module):
                 z = shift_3d(z)
         return z[:, :, :, 0:256]
 
-
-# from thop import profile
-# model = DAUHST(num_iterations=9).cuda()
-# input = torch.randn(1,256, 316).cuda()
-# Phi_batch = torch.randn(1, 31, 256, 316).cuda()
-# Phi_s_batch = torch.randn(1, 256, 316).cuda()
-# # rgb = torch.randn(1, 3, 256, 256).cuda()
-# input_mask = (Phi_batch, Phi_s_batch)
-# # z = model(input, rgb, input_mask)
-# # print(z.shape)
-# total_ops, total_params = profile(model, inputs=(input, input_mask))
-# print(
-#         "%s | %.2f | %.2f" % ("MST_Plus_Plus", total_params / (1000 ** 2), total_ops / (1000 ** 3))
-#     )

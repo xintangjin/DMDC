@@ -1017,27 +1017,3 @@ class OLU(nn.Module):
 
         return z[:, :, :, 0:256]
 
-
-# from thop import profile
-# model = OLU(num_iterations=9).cuda()
-# # pretrained_model_path = "/home/czy/NET/spectral/WST/simulation/train_code/exp/dauhst_3stg/2022_12_16_12_46_19/model/model_epoch_1.pth"
-# # checkpoint = torch.load(pretrained_model_path)
-# # model.load_state_dict({k.replace('module.', ''): v for k, v in checkpoint.items()}, strict=True)
-#
-#
-# input = torch.randn(1, 256, 310).cuda()
-# Phi_batch = torch.randn(1, 28, 256, 310).cuda()
-# Phi_s_batch = torch.randn(1, 256, 310).cuda()
-
-# model = OLU(num_iterations=3).cuda()
-# input = torch.randn(2, 256,316).cuda()
-# Phi_batch = torch.randn(2,31,256,316).cuda()
-# Phi_s_batch = torch.randn(2, 256,316).cuda()
-# input_mask = (Phi_batch, Phi_s_batch)
-# z = model(input, input_mask)
-# print(z.shape)
-# total_ops, total_params = profile(model, inputs=(input, input_mask))
-# print(
-#         "%s | %.2f | %.2f" % ("MST_Plus_Plus", total_params / (1000 ** 2), total_ops / (1000 ** 3))
-#     )
-# # print(z.shape)
