@@ -131,12 +131,23 @@ def test(val_loader, model, input_mask_test, mask3d_batch_test):
             loss_ssim = criterion_ssim(model_out[:, :, :, :], test_gt[:, :, :, :])
 
         else:
-            if test_gt.shape[0] != mask3d_batch_test.shape[0]:
-                mask3d_batch_test = mask3d_batch_test[:test_gt.shape[0],:,:,:]
-                mask3d_batch1 , input_mask1 = input_mask_test
-                mask3d_batch1 = mask3d_batch1[:test_gt.shape[0],:,:,:]
-                input_mask1 = input_mask1[:test_gt.shape[0],:,:]
-                input_mask_test = mask3d_batch1, input_mask1
+            if opt.method in ['mst_plus_plus', 'lambda_net']:
+                if test_gt.shape[0] != mask3d_batch_test.shape[0]:
+                    mask3d_batch_test = mask3d_batch_test[:test_gt.shape[0],:,:,:]
+                    input_mask1 = input_mask_test
+                    input_mask1 = input_mask1[:test_gt.shape[0], :, :]
+                    input_mask_test = input_mask1
+            elif opt.method in ['tsa_net']:
+                if test_gt.shape[0] != mask3d_batch_test.shape[0]:
+                    mask3d_batch_test = mask3d_batch_test[:test_gt.shape[0], :, :, :]
+
+            else:
+                if test_gt.shape[0] != mask3d_batch_test.shape[0]:
+                    mask3d_batch_test = mask3d_batch_test[:test_gt.shape[0],:,:,:]
+                    mask3d_batch1, input_mask1 = input_mask_test
+                    mask3d_batch1 = mask3d_batch1[:test_gt.shape[0],:,:,:]
+                    input_mask1 = input_mask1[:test_gt.shape[0], :, :]
+                    input_mask_test = mask3d_batch1, input_mask1
 
             input_meas = init_meas(test_gt, mask3d_batch_test, opt.input_setting)
             model_out = model(input_meas, input_mask_test)
